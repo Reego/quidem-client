@@ -1,0 +1,257 @@
+.customHeader {
+    height:70px;
+    width:100vw;
+    text-align:center;
+    background-color:#c33;
+    font-family:Sans-serif;
+    font-weight:500;
+    font-size:24px;
+    color:#eee;
+    border-bottom:3px solid rgba(10, 0, 30, .25);
+}
+
+.singleUserTab div {
+    width:100%;
+    height:100%;
+    line-height:70px;
+}
+
+.headerTab {
+    display:inline-block;
+    width:50%;
+    line-height:70px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.headerTab:hover, .headerTabActive {
+    background-color:rgba(0, 0, 0, .1);
+    color:#eee;
+}
+
+/* Question */
+
+.questionBreak {
+
+}
+
+/* Display */
+
+.quidemDisplay {
+    padding-bottom:100px;
+}
+
+/* Panels */
+
+.card {
+    width:100vw;
+    margin-top:1px;
+    background-color:#d5d5d5;
+}
+
+.innerCard {
+    height:100%;
+    width:95%;
+    margin:0 auto;
+    padding:20px 0;
+}
+
+.innerCard > h1:first-child {
+    display:block;
+    padding:0;
+}
+
+.innerCard p {
+}
+
+/* Author only */
+
+.nicknameDisplay {
+    display:inline-block;
+    width:50%;
+    padding:20px 0px;
+    text-align:center;
+    font-size:18px;
+    color:#eee;
+    font-family:Sans-serif;
+}
+
+.nicknameDisplay span {
+    background-color:#25a;
+    padding:5px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.nicknameDisplay span:hover {
+    background-color:#36c;
+}
+
+/* Nominations */
+
+.nomination {
+}
+
+.nomination > .innerCard {
+}
+
+.nominationVotingSection, .nominationContent {
+    display:block;
+}
+
+.nominationVotingSection {
+    width:100px;
+    color:#c33;
+    font-weight:600;
+    font-family:Sans-serif;
+    text-align:center;
+    font-size:20px;
+}
+
+.nominationVotingSection span {
+    display:inline-block;
+}
+
+
+.nominationVotingSection .voteNumber {
+    text-align:center;
+    font-size:35px;
+    margin-left:20px;
+}
+
+.nominationContent {
+    text-align:justify;
+    font-size:18px;
+}
+
+.nominationContent h3 {
+    font-size:16px;
+}
+
+/* User footer */
+
+.userFooter, .userFooterSpace {
+    padding:10px 0;
+    width:100vw;
+}
+
+.userFooter {
+    position:fixed;
+    bottom:0;
+    background-color:#222;
+    border-top:2px solid #000;
+    text-align:center;
+}
+
+.userFooterButton:first-child {
+    margin-right:20px;
+}
+
+.userFooterButton:last-child {
+    margin-right:20px;
+}
+
+.userFooterButton {
+    display:inline-block;
+    padding:10px 15px;
+    background-color:#25a;
+    color:#ddd;
+    cursor:pointer;
+}
+
+.userFooterButton:hover {
+    color:#eee;
+    background-color:#36c;
+}
+
+.userFooterSpace {
+    visibility:none;
+}
+
+@media only screen and (min-width: 500px) {
+
+    /* Author only */
+
+    .nicknameDisplay {
+        width:33%;
+    }
+
+    /* Nominations */
+
+    .nominationVotingSection, .nominationContent {
+        display:inline-block;
+        vertical-align:top;
+    }
+
+    .nominationVotingSection {
+        width:10%;
+        max-width:100px;
+        font-size:16px;
+    }
+
+    .nominationVotingSection span {
+        display:block;
+        text-align:center;
+    }
+
+    .nominationVotingSection .voteNumber {
+        margin-top:10px;
+        margin-left:0;
+    }
+
+    .nominationContent {
+        width:80%;
+        margin-left:5%;
+    }
+
+    .nomination {
+        cursor:pointer;
+    }
+}
+
+
+
+@media only screen and (min-width: 700px) {
+
+    /* Panels */
+
+    .card {
+        width:90vw;
+        margin:1px auto 0 auto;
+        border-radius:2px;
+    }
+
+    .stripedCard {
+        border-left:15px solid #d55;
+    }
+
+    .innerCard {
+        width:95%;
+    }
+
+    /* Nominations */
+
+    .nominationContent {
+        width:86%;
+        margin-left:2%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+
+    /* Author only */
+
+    .nicknameDisplay {
+        width:25%;
+    }
+
+    /* Nominations */
+
+    .nominationContent {
+        width:90%;
+        margin-left:0%;
+    }
+}
+
+
+

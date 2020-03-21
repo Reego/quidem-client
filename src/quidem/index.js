@@ -3,7 +3,95 @@ import React, {
     useEffect,
 } from 'react';
 
-import Layout from '../components/layout';
+import Layout, { Break } from '../components/layout';
+
+import style from './quidem.module.css';
+
+const Card = ({ children, extraClass }) => (
+    <div className={
+        extraClass
+            ? style.card + ' ' + extraClass
+            : style.card
+    }>
+        <div className={style.innerCard}>
+            { children }
+        </div>
+    </div>
+);
+
+const TitledCard = ({ children, title, extraClass }) => (
+    <Card extraClass={extraClass}>
+        <h1>{title}</h1>
+    </Card>
+);
+
+const Nomination = ({ content, nickname }) => (
+
+    <div className={style.card + ' ' + style.nomination}>
+        <div className={style.innerCard}>
+            <div className={style.nominationVotingSection}>
+                <span>VOTE</span>
+                <span className={style.voteNumber}>3</span>
+            </div>
+            <div className={style.nominationContent}>
+                { content }
+                <h3>{ nickname }</h3>
+            </div>
+        </div>
+    </div>
+);
+
+const NicknameDisplay = ({ nickname }) => <div className={style.nicknameDisplay}><span>{ nickname }</span></div>
+
+const AuthorPanel = () => {
+    return (
+        <React.Fragment>
+            {/* User nickname display */}
+            <div className={style.card}>
+                <div className={style.innerCard}>
+                    <NicknameDisplay nickname='Pete Buttigiege'/>
+                    <NicknameDisplay nickname='Michael Bloomberg'/>
+                    <NicknameDisplay nickname='Joe Biden'/>
+                    <NicknameDisplay nickname='Bernie Sanders'/>
+                    <NicknameDisplay nickname='Amy Klobuchar'/>
+                </div>
+            </div>
+            {/* Settings display, save button at the bottom - tells if unsaved */}
+            <div className={style.card}>
+                <div className={style.innerCard}>
+                    <form>
+                    </form>
+                </div>
+            </div>
+        </React.Fragment>
+    );
+};
+
+const UserFooterButton = ({ children }) => (
+    <div className={style.userFooterButton}>
+        { children }
+    </div>
+);
+
+const UserFooter = () => (
+    <div className={style.userFooter}>
+        <UserFooterButton>Reset Vote</UserFooterButton>
+        <UserFooterButton>Send Vote</UserFooterButton>
+    </div>
+);
+
+const UserPanel = () => {
+    return (
+        <React.Fragment>
+            <Nomination content='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?' nickname='Lorem'/>
+            <Nomination content='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?' nickname='Lorem'/>
+            <Nomination content='Vote for me!' nickname='Joe Biden'/>
+            <Break h='80px'/>
+            <UserFooter/>
+            <div className={style.userFooterSpace}/>
+        </React.Fragment>
+    );
+};
 
 const Page = () => {
 
@@ -20,9 +108,26 @@ const Page = () => {
     //         socket.close();
     //     };
     // });
+    const isAuthor = false;
 
     return (
-        <Layout></Layout>
+        <Layout customHeader={
+            (isAuthor)
+                ?   <div className={style.customHeader}>
+                        <div className={style.headerTab + ' '+ style.headerTabActive}>Author</div>
+                        <div className={style.headerTab}>Quidem</div>
+                    </div>
+                : <div className={style.customHeader + ' ' + style.singleUserTab}><div>Quidem</div></div>
+        }>
+            <Break h='50px'/>
+            <Card extraClass={style.stripedCard}><h1>Question</h1></Card>
+            <Break h='80px'/>
+            {(isAuthor &&
+                <AuthorPanel/>
+            ) ||
+                <UserPanel/>
+            }
+        </Layout>
     );
 };
 
