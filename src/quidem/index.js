@@ -3,21 +3,9 @@ import React, {
     useEffect,
 } from 'react';
 
-import Layout, { Break } from '../components/layout';
+import Layout, { Card, Break } from '../components/layout';
 
 import style from './quidem.module.css';
-
-const Card = ({ children, extraClass }) => (
-    <div className={
-        extraClass
-            ? style.card + ' ' + extraClass
-            : style.card
-    }>
-        <div className={style.innerCard}>
-            { children }
-        </div>
-    </div>
-);
 
 const TitledCard = ({ children, title, extraClass }) => (
     <Card extraClass={extraClass}>
@@ -27,18 +15,16 @@ const TitledCard = ({ children, title, extraClass }) => (
 
 const Nomination = ({ content, nickname }) => (
 
-    <div className={style.card + ' ' + style.nomination}>
-        <div className={style.innerCard}>
-            <div className={style.nominationVotingSection}>
-                <span>VOTE</span>
-                <span className={style.voteNumber}>3</span>
-            </div>
-            <div className={style.nominationContent}>
-                { content }
-                <h3>{ nickname }</h3>
-            </div>
+    <Card extraClass={style.nomination}>
+        <div className={style.nominationVotingSection}>
+            <span>VOTE</span>
+            <span className={style.voteNumber}>3</span>
         </div>
-    </div>
+        <div className={style.nominationContent}>
+            { content }
+            <h3>{ nickname }</h3>
+        </div>
+    </Card>
 );
 
 const NicknameDisplay = ({ nickname }) => <div className={style.nicknameDisplay}><span>{ nickname }</span></div>
@@ -47,22 +33,18 @@ const AuthorPanel = () => {
     return (
         <React.Fragment>
             {/* User nickname display */}
-            <div className={style.card}>
-                <div className={style.innerCard}>
-                    <NicknameDisplay nickname='Pete Buttigiege'/>
-                    <NicknameDisplay nickname='Michael Bloomberg'/>
-                    <NicknameDisplay nickname='Joe Biden'/>
-                    <NicknameDisplay nickname='Bernie Sanders'/>
-                    <NicknameDisplay nickname='Amy Klobuchar'/>
-                </div>
-            </div>
+            <Card extraClass={style.card}>
+                <NicknameDisplay nickname='Pete Buttigiege'/>
+                <NicknameDisplay nickname='Michael Bloomberg'/>
+                <NicknameDisplay nickname='Joe Biden'/>
+                <NicknameDisplay nickname='Bernie Sanders'/>
+                <NicknameDisplay nickname='Amy Klobuchar'/>
+            </Card>
             {/* Settings display, save button at the bottom - tells if unsaved */}
-            <div className={style.card}>
-                <div className={style.innerCard}>
-                    <form>
-                    </form>
-                </div>
-            </div>
+            <Card>
+                <form>
+                </form>
+            </Card>
         </React.Fragment>
     );
 };

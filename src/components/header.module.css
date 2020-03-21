@@ -1,6 +1,12 @@
 .header {
-    display:block;
-    height:80px;
+    height:70px;
     width:100vw;
-    background-color:#a33;
+    text-align:center;
+    line-height:70px;
+    background-color:#c33;
+    font-family:Sans-serif;
+    font-weight:500;
+    font-size:24px;
+    color:#eee;
+    border-bottom:3px solid rgba(10, 0, 30, .25);
 }

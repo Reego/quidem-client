@@ -1,0 +1,41 @@
+/* Panels */
+
+.card {
+    width:100vw;
+    margin-top:1px;
+    background-color:#d5d5d5;
+}
+
+.innerCard {
+    height:100%;
+    width:95%;
+    margin:0 auto;
+    padding:20px 0;
+}
+
+.innerCard > h1:first-child {
+    display:block;
+    padding:0;
+}
+
+.innerCard p {
+}
+
+@media only screen and (min-width: 700px) {
+
+    /* Panels */
+
+    .card {
+        width:90vw;
+        margin:1px auto 0 auto;
+        border-radius:2px;
+    }
+
+    .stripedCard {
+        border-left:15px solid #d55;
+    }
+
+    .innerCard {
+        width:95%;
+    }
+}

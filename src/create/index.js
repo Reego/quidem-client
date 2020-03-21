@@ -6,6 +6,7 @@ const SettingsForm = () => {
 
     return (
         <form>
+
             <input type='submit'/>
         </form>
     );
@@ -14,7 +15,9 @@ const SettingsForm = () => {
 const Page = () => {
 
     return (
-        <SettingsForm/>
+        <Layout>
+            <SettingsForm/>
+        </Layout>
     );
 };
 
