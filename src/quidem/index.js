@@ -4,22 +4,37 @@ import React, {
 } from 'react';
 
 import Layout, { Card, Break } from '../components/layout';
+import { useSelector, useDispatcher } from 'react-redux';
 
 import style from './quidem.module.css';
 
-const TitledCard = ({ children, title, extraClass }) => (
-    <Card extraClass={extraClass}>
-        <h1>{title}</h1>
-    </Card>
-);
+const State = {
+    PRE_VOTING_PHASE: 1,
+    VOTING_PHASE: 2,
+    POST_VOTING_PHASE: 3,
+};
 
-const Nomination = ({ content, nickname }) => (
+const Nomination = ({ content, nickname, phase, removable }) => (
 
-    <Card extraClass={style.nomination}>
-        <div className={style.nominationVotingSection}>
-            <span>VOTE</span>
-            <span className={style.voteNumber}>3</span>
-        </div>
+    <Card extraClass={
+        (phase === State.VOTING_PHASE)
+        ? style.nomination + ' ' + style.pointerCursor
+        : style.nomination
+    }>
+        { (phase !== State.PRE_VOTING_PHASE &&
+            (<div className={style.nominationVotingSection}>
+                {phase === State.VOTING_PHASE &&
+                    <span>VOTE</span>
+                }
+                <span className={style.voteNumber}>3</span>
+            </div>)) ||
+            (phase === State.PRE_VOTING_PHASE && removable) &&
+            (
+                (<div className={style.nominationVotingSection + ' ' + style.removable}>
+                    <span>REMOVE</span>
+                    <span className={style.voteNumber}>X</span>
+                </div>))
+        }
         <div className={style.nominationContent}>
             { content }
             <h3>{ nickname }</h3>
@@ -49,33 +64,51 @@ const AuthorPanel = () => {
     );
 };
 
-const UserFooterButton = ({ children }) => (
-    <div className={style.userFooterButton}>
-        { children }
-    </div>
-);
-
-const UserFooter = () => (
+const UserFooter = ({ phase }) => (
     <div className={style.userFooter}>
-        <UserFooterButton>Reset Vote</UserFooterButton>
-        <UserFooterButton>Send Vote</UserFooterButton>
+        { (phase === State.VOTING_PHASE &&
+            <React.Fragment>
+                <div className={style.userFooterButton}>Reset Vote</div>
+                <div className={style.userFooterButton}>>Send Vote</div>
+            </React.Fragment>) ||
+            (
+                <h3>Awaiting Vote Results...</h3>
+            )
+        }
     </div>
 );
 
-const UserPanel = () => {
+const UserPanel = ({ phase, nominations }) => {
     return (
         <React.Fragment>
-            <Nomination content='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?' nickname='Lorem'/>
-            <Nomination content='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?' nickname='Lorem'/>
-            <Nomination content='Vote for me!' nickname='Joe Biden'/>
+            { phase === State.PRE_VOTING_PHASE &&
+                <React.Fragment>
+                    <Card>
+                        <h1>Create Nomination</h1>
+                        <form className={style.nominationCreationPanel}>
+                            <input type='text' placeholder='Nomination' required/>
+                            <div className={style.userFooterButton}>Send Nomination</div>
+                        </form>
+                    </Card>
+                    <Break h='20px'/>
+                </React.Fragment>
+            }
+            { nominations }
+            <Nomination phase={phase} removable={true} content='Vote for me!' nickname='Joe Biden'/>
             <Break h='80px'/>
-            <UserFooter/>
-            <div className={style.userFooterSpace}/>
+            { phase === State.VOTING_PHASE &&
+                <React.Fragment>
+                    <UserFooter/>
+                    <div className={style.userFooterSpace}/>
+                </React.Fragment>
+            }
         </React.Fragment>
     );
 };
 
 const Page = () => {
+
+    const socket = useSelector(state => state.socket);
 
     // let socket = null;
 
@@ -91,24 +124,23 @@ const Page = () => {
     //     };
     // });
     const isAuthor = false;
+    const onAuthorTab = false
+    const phase = State.POST_VOTING_PHASE;
+
+    const customHeader = (isAuthor)
+    ?   <div className={style.customHeader}>
+            <div className={style.headerTab + ' '+ style.headerTabActive}>Author</div>
+            <div className={style.headerTab}>Quidem</div>
+        </div>
+    :
+        <div className={style.customHeader + ' ' + style.singleUserTab}><div>Quidem</div></div>
 
     return (
-        <Layout customHeader={
-            (isAuthor)
-                ?   <div className={style.customHeader}>
-                        <div className={style.headerTab + ' '+ style.headerTabActive}>Author</div>
-                        <div className={style.headerTab}>Quidem</div>
-                    </div>
-                : <div className={style.customHeader + ' ' + style.singleUserTab}><div>Quidem</div></div>
-        }>
+        <Layout customHeader={customHeader}>
             <Break h='50px'/>
             <Card extraClass={style.stripedCard}><h1>Question</h1></Card>
             <Break h='80px'/>
-            {(isAuthor &&
-                <AuthorPanel/>
-            ) ||
-                <UserPanel/>
-            }
+            { (isAuthor && onAuthorTab && <AuthorPanel/>) || <UserPanel phase={phase}/> }
         </Layout>
     );
 };

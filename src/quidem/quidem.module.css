@@ -1,3 +1,7 @@
+.pointerCursor {
+    cursor:pointer;
+}
+
 .customHeader {
     height:70px;
     width:100vw;
@@ -64,6 +68,30 @@
     background-color:#36c;
 }
 
+/* Nomination Creation */
+
+.nominationCreationPanel {
+
+}
+
+.nominationCreationPanel input {
+    display:block;
+    min-width:50%;
+    padding:8px 20px;
+    background-color:#eee;
+    outline:none;
+    border:none;
+    font-size:18px;
+}
+
+.nominationCreationPanel input::placeholder {
+    font-size:18px;
+}
+
+.nominationCreationPanel div {
+    margin-top:20px;
+}
+
 /* Nominations */
 
 .nomination {
@@ -92,7 +120,7 @@
 
 .nominationVotingSection .voteNumber {
     text-align:center;
-    font-size:35px;
+    font-size:30px;
     margin-left:20px;
 }
 
@@ -103,6 +131,10 @@
 
 .nominationContent h3 {
     font-size:16px;
+}
+
+.removable {
+    cursor:pointer;
 }
 
 /* User footer */
@@ -182,7 +214,6 @@
     }
 
     .nomination {
-        cursor:pointer;
     }
 }
 
