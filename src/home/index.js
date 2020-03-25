@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import createWebSocketConnection from '../common/socket';
 
 import Layout from '../components/layout';
 
@@ -15,6 +17,7 @@ const Page = () => {
     const [sessionIdError, setSessionIdError] = useState(null);
     const [nicknameError, setNicknameError] = useState(null);
 
+    const dispatch = useDispatch();
 
     const formHandler = (e) => {
         e.preventDefault();
@@ -33,8 +36,7 @@ const Page = () => {
         }
 
         if(isValidJoinForm) { // request join session, create WebSocket connection
-            setNicknameError(null);
-            setSessionIdError("Session ID invalid");
+            createWebSocketConnection(session_id, dispatch);
         }
     };
 

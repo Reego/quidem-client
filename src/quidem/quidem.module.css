@@ -68,6 +68,34 @@
     background-color:#36c;
 }
 
+.settings input {
+    display:block;
+    margin:20px auto;
+    padding-top:10px;
+    padding-bottom:8px;
+    background-color:#eee;
+    outline:none;
+    border-left:none; border-right:none; border-top:none;
+    border-bottom:3px solid rgba(0, 0, 0, .2);
+}
+
+.settings input[type="text"] {
+    width:85%;
+    padding-left:10px;
+    font-weight:500;
+    color:#444;
+}
+
+.settings input::placeholder {
+    font-size:14px;
+    color:#333;
+}
+.settings input[type="submit"] {
+    padding:8px 25px;
+    font-size:14px;
+    cursor:pointer;
+}
+
 /* Nomination Creation */
 
 .nominationCreationPanel {
