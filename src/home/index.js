@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import createWebSocketConnection from '../common/socket';
 
@@ -16,6 +16,9 @@ const Page = () => {
 
     const [sessionIdError, setSessionIdError] = useState(null);
     const [nicknameError, setNicknameError] = useState(null);
+    const [redirect, setRedirect] = useState(false);
+
+    const state = useSelector(state => state);
 
     const dispatch = useDispatch();
 
@@ -36,9 +39,19 @@ const Page = () => {
         }
 
         if(isValidJoinForm) { // request join session, create WebSocket connection
-            createWebSocketConnection(session_id, dispatch);
+            createWebSocketConnection(session_id,
+                () => {
+                    setRedirect(session_id + '/');
+                },
+            dispatch,
+            nickname
+            );
         }
     };
+
+    if(state.quidem && redirect) {
+        return <Redirect to={'/quidem/' + redirect}/>
+    }
 
     return (
         <Layout>

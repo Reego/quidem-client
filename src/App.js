@@ -14,7 +14,7 @@ import Home from './home/index';
 const App = () => (
     <Router>
         <Switch>
-            <Route path='/quidem'>
+            <Route path='/quidem/(\d)+/'>
                 <Quidem/>
             </Route>
             <Route path='/create'>

@@ -5,8 +5,8 @@ import Header from './header';
 
 import style from './layout.module.css';
 
-const Card = ({ children, extraClass }) => (
-    <div className={
+const Card = ({ children, extraClass, selectEvent }) => (
+    <div onClick={selectEvent} className={
         extraClass
             ? style.card + ' ' + extraClass
             : style.card

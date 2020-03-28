@@ -34,12 +34,13 @@
 .join input {
     display:block;
     margin:20px auto;
-    padding-top:10px;
-    padding-bottom:8px;
+    padding-top:15px;
+    padding-bottom:12px;
     background-color:#eee;
     outline:none;
     border-left:none; border-right:none; border-top:none;
     border-bottom:3px solid rgba(0, 0, 0, .2);
+    font-size:16px;
 }
 
 .join input[type="text"] {

@@ -2,6 +2,10 @@
     cursor:pointer;
 }
 
+h1 {
+    font-family:Sans-serif;
+}
+
 .customHeader {
     height:70px;
     width:100vw;
@@ -68,11 +72,16 @@
     background-color:#36c;
 }
 
+.settings {
+    font-size:20px;
+}
+
 .settings input {
     display:block;
-    margin:20px auto;
+    margin:20px 20px;
     padding-top:10px;
     padding-bottom:8px;
+    font-size:16px;
     background-color:#eee;
     outline:none;
     border-left:none; border-right:none; border-top:none;
@@ -87,7 +96,7 @@
 }
 
 .settings input::placeholder {
-    font-size:14px;
+    font-size:16px;
     color:#333;
 }
 .settings input[type="submit"] {
@@ -102,7 +111,7 @@
 
 }
 
-.nominationCreationPanel input {
+.nominationCreationPanel input[type='text'] {
     display:block;
     min-width:50%;
     padding:8px 20px;
@@ -112,12 +121,26 @@
     font-size:18px;
 }
 
-.nominationCreationPanel input::placeholder {
+.nominationCreationPanel input[type='text']::placeholder {
     font-size:18px;
 }
 
 .nominationCreationPanel div {
     margin-top:20px;
+}
+
+.nominationCreationPanel .userFooterButton {
+    display:block;
+    margin-top:10px;
+    font-size:18px;
+    padding:10px 15px;
+    background-color:#25a;
+    color:#ddd;
+    cursor:pointer;
+}
+
+.nominationCreationPanel .userFooterButton:focus {
+    outline:none;
 }
 
 /* Nominations */
@@ -178,6 +201,8 @@
     background-color:#222;
     border-top:2px solid #000;
     text-align:center;
+    font-family:Sans-serif;
+    color:#ddd;
 }
 
 .userFooterButton:first-child {
@@ -203,6 +228,17 @@
 
 .userFooterSpace {
     visibility:none;
+}
+
+.nextPhaseButton {
+    background-color:#25a;
+    margin:0 auto;
+    padding:15px 10px;
+    font-size:18px;
+    width:200px;
+    color:#eee;
+    text-align:center;
+    cursor:pointer;
 }
 
 @media only screen and (min-width: 500px) {
@@ -244,7 +280,6 @@
     .nomination {
     }
 }
-
 
 
 @media only screen and (min-width: 700px) {

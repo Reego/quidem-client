@@ -7,39 +7,25 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const reducer = (state={}) => {
-    return state;
-}
+import reducer from './common/reducers';
 
-const defaultState = {
-    quidem: {
-        phase: 2,
-        vote: [],
-        settings: {},
-        votes: {},
-        nominations: [
-            {
-                nomination_id: 2,
-                nomination: 'Who?',
-            },
-            {
-                nomination_id: -1,
-                nomination: 'Woot woot!',
-            }
-        ],
-        users: {
-            1: 'Bubba',
-        },
-    },
-    user: {
-        consumer_id: 0,
-        nickname: null,
-        votes: [],
-    },
-    socket: null
-};
+// const defaultState = {
+//     quidem: {
+//         phase: null,
+//         settings: {},
+//         votes: {},
+//         nominations: [],
+//         users: {},
+//     },
+//     user: {
+//         consumer_id: null,
+//         nickname: null,
+//         votes: [],
+//     },
+//     socket: null
+// };
 
-const store = createStore(reducer, defaultState);
+const store = createStore(reducer, {});
 
 ReactDOM.render(
     <Provider store={store}>

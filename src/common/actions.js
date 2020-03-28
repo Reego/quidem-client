@@ -9,9 +9,9 @@ const receiveWebSocketConnect = (socket) => ({
     socket
 });
 
-const receiveState = (state) => ({
+const receiveState = (data) => ({
     type: RECEIVE_STATE,
-    state
+    data
 });
 
 const resetState = () => ({type: RESET_STATE});
