@@ -4,7 +4,7 @@ import {
     resetState
 } from './actions';
 
-const WEBSOCKET_PATH = 'ws://10.163.1.120:8000/ws/quidem/';
+const WEBSOCKET_PATH = 'ws://127.0.0.1:8000/ws/quidem/';
 const CLIENT_KEY_RANGE = 100000;
 
 const createWebSocketConnection = (session_id, onInitialMessage, dispatch, nickname='Author') => {
