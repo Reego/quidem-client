@@ -8,7 +8,7 @@ import Layout, { Card, Break } from '../components/layout';
 
 import style from './create.module.css';
 
-const CREATE_PATH = 'http://10.163.1.120:8000/create/';
+const CREATE_PATH = 'http://127.0.0.1:8000/create/';
 
 const Page = () => {
 
